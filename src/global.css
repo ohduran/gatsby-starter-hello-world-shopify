@@ -1,0 +1,7 @@
+/* To learn more about how to use Tailwind in your CSS, visit https://tailwindcss.com/ */
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;

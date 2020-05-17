@@ -5,7 +5,7 @@ const VariantItem = ({ variant }) => {
   const { addToCart } = useContext(CartContext)
   const handleAddToCartButton = variant => {
     addToCart(variant)
-    console.log("item added to cart with id", shopifyId)
+    console.log("item added to cart with id", variant.shopifyId)
   }
   return (
     <div

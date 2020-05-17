@@ -1,8 +1,9 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import DefaultLayout from "../layouts"
 
 const ProductsPage = ({ data }) => (
-  <>
+  <DefaultLayout>
     <h1>Products</h1>
     <ul>
       {data.allShopifyProduct.edges.map(({ node }) => (
@@ -16,7 +17,7 @@ const ProductsPage = ({ data }) => (
         </li>
       ))}
     </ul>
-  </>
+  </DefaultLayout>
 )
 
 export default ProductsPage

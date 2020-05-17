@@ -1,7 +1,13 @@
 import React from "react"
+import DefaultLayout from "../layouts"
+import CartList from "../components/CartList"
 
 const Cart = () => {
-  return <div>The cart is empty</div>
+  return (
+    <DefaultLayout>
+      <CartList />
+    </DefaultLayout>
+  )
 }
 
 export default Cart

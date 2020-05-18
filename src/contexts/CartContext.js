@@ -3,7 +3,7 @@ import Client from "shopify-buy"
 
 import { cartReducer } from "../reducers/CartReducer"
 
-const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
+const CART_STORAGE_KEY = "shopify_checkout_id"
 
 const client = Client.buildClient({
   storefrontAccessToken: process.env.SHOP_TOKEN,
@@ -25,7 +25,7 @@ const CartContextProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, initialCartState, () => {
     const isBrowser = typeof window !== "undefined"
     if (isBrowser) {
-      const localData = localStorage.getItem(SHOPIFY_CHECKOUT_STORAGE_KEY)
+      const localData = localStorage.getItem(CART_STORAGE_KEY)
       return localData ? JSON.parse(localData) : initialCartState
     }
     return initialCartState
@@ -34,7 +34,7 @@ const CartContextProvider = ({ children }) => {
   useEffect(() => {
     const isBrowser = typeof window !== "undefined"
     if (isBrowser) {
-      localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, JSON.stringify(cart))
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart))
     }
   }, cart)
 

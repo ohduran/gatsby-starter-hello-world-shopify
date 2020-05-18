@@ -1,5 +1,7 @@
-import React, { createContext, useState, useEffect } from "react"
+import React, { createContext, useReducer, useEffect } from "react"
 import Client from "shopify-buy"
+
+import { cartReducer } from "../reducers/CartReducer"
 
 const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
 
@@ -20,29 +22,13 @@ const CartContext = createContext({
 })
 
 const CartContextProvider = ({ children }) => {
-  const [cart, setCart] = useState(initialCartState)
-  const { checkout, client } = cart
+  const [cart, dispatch] = useReducer(cartReducer, initialCartState)
 
-  const addToCart = variant => {
-    const lineItemsToAdd = [{ variantId: variant.shopifyId, quantity: 1 }]
-    const newCheckout = { lineItems: [...checkout.lineItems, lineItemsToAdd] }
-    setCart(prevState => {
-      return { ...prevState, checkout: newCheckout, isAdding: false }
-    })
-  }
-
-  const removeFromCart = id => {
-    const newCheckout = {
-      lineItems: checkout.lineItems.filter(item => item.shopifyId !== id),
-    }
-    setCart(prevState => {
-      return { ...prevState, checkout: newCheckout, isAdding: false }
-    })
-  }
-
-  const value = { cart, addToCart, removeFromCart }
-
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>
+  return (
+    <CartContext.Provider value={{ cart, dispatch }}>
+      {children}
+    </CartContext.Provider>
+  )
 }
 
 export { CartContext, CartContextProvider }

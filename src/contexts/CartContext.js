@@ -23,12 +23,19 @@ const CartContext = createContext({
 
 const CartContextProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, initialCartState, () => {
-    const localData = localStorage.getItem(SHOPIFY_CHECKOUT_STORAGE_KEY)
-    return localData ? JSON.parse(localData) : initialCartState
+    const isBrowser = typeof window !== "undefined"
+    if (isBrowser) {
+      const localData = localStorage.getItem(SHOPIFY_CHECKOUT_STORAGE_KEY)
+      return localData ? JSON.parse(localData) : initialCartState
+    }
+    return initialCartState
   })
 
   useEffect(() => {
-    localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, JSON.stringify(cart))
+    const isBrowser = typeof window !== "undefined"
+    if (isBrowser) {
+      localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, JSON.stringify(cart))
+    }
   }, cart)
 
   return (

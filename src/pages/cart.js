@@ -1,12 +1,17 @@
-import React from "react"
+import React, { useContext } from "react"
 import DefaultLayout from "../layouts"
-import CartList from "../components/CartList"
+import { CartContext } from "../contexts/CartContext"
 
 const Cart = () => {
+  const {
+    cart: {
+      checkout: { lineItems },
+    },
+  } = useContext(CartContext)
   return (
     <DefaultLayout>
       <h1>Cart</h1>
-      <CartList />
+      <div>The cart length is {lineItems.length}</div>
     </DefaultLayout>
   )
 }

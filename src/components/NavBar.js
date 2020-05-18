@@ -5,7 +5,11 @@ import Cart from "../icons/Cart"
 import Home from "../icons/Home"
 
 const NavBar = () => {
-  const { cart } = useContext(CartContext)
+  const {
+    cart: {
+      checkout: { lineItems },
+    },
+  } = useContext(CartContext)
   return (
     <nav>
       <Link to="/">
@@ -13,7 +17,7 @@ const NavBar = () => {
       </Link>
       <Link to="/cart">
         <Cart />
-        <span>{cart.length}</span>
+        <span>{lineItems.length}</span>
       </Link>
     </nav>
   )

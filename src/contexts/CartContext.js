@@ -1,30 +1,46 @@
 import React, { createContext, useState, useEffect } from "react"
+import Client from "shopify-buy"
 
-const CART_STORAGE_ID = "cartStorage"
+const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
 
-const CartContext = createContext()
+const client = Client.buildClient({
+  storefrontAccessToken: process.env.SHOP_TOKEN,
+  domain: `${process.env.SHOP_NAME}.myshopify.com`,
+})
+
+const initialCartState = {
+  client,
+  isAdding: false,
+  checkout: { lineItems: [] },
+}
+
+const CartContext = createContext({
+  cart: initialCartState,
+  setCart: () => null,
+})
 
 const CartContextProvider = ({ children }) => {
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState(initialCartState)
+  const { checkout, client } = cart
 
   const addToCart = variant => {
-    setCart([...cart, variant])
+    const lineItemsToAdd = [{ variantId: variant.shopifyId, quantity: 1 }]
+    const newCheckout = { lineItems: [...checkout.lineItems, lineItemsToAdd] }
+    setCart(prevState => {
+      return { ...prevState, checkout: newCheckout, isAdding: false }
+    })
   }
 
   const removeFromCart = id => {
-    setCart(cart.filter(item => item.shopifyId !== id))
+    const newCheckout = {
+      lineItems: checkout.lineItems.filter(item => item.shopifyId !== id),
+    }
+    setCart(prevState => {
+      return { ...prevState, checkout: newCheckout, isAdding: false }
+    })
   }
 
   const value = { cart, addToCart, removeFromCart }
-
-  // useEffect(() => {
-  //   // WebPack doesn't allow for a normal flow of window.localStorage
-  //   // and it has to be controled in this weird way.
-  //   const windowGlobal = typeof window !== "undefined" && window
-  //   if (windowGlobal) {
-  //     windowGlobal.localStorage.setItem(CART_STORAGE_ID, JSON.stringify(cart))
-  //   }
-  // }, [cart])
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

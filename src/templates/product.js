@@ -16,7 +16,7 @@ const ProductTemplate = ({ pageContext }) => {
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         {product.images.map(image => {
           return (
-            <figure>
+            <figure key={image.originalSrc}>
               <img
                 src={image.originalSrc}
                 alt={product.title}
@@ -30,7 +30,7 @@ const ProductTemplate = ({ pageContext }) => {
         })}
       </div>
       {product.variants.map(variant => {
-        return <VariantItem variant={variant} />
+        return <VariantItem variant={variant} key={variant.shopifyId} />
       })}
     </DefaultLayout>
   )

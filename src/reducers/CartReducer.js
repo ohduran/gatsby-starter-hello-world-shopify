@@ -1,7 +1,9 @@
 export const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_VARIANT":
-      let lineItemsToAdd = [{ variantId: action.shopifyId, quantity: 1 }]
+      let lineItemsToAdd = [
+        { variantId: action.variantId, quantity: action.quantity },
+      ]
       let newCheckout = {
         lineItems: [...state.checkout.lineItems, lineItemsToAdd],
       }
@@ -14,6 +16,11 @@ export const cartReducer = (state, action) => {
         ),
       }
       return { ...state, checkout: filteredCheckOut, isAdding: false }
+
+    case "START_ADDING":
+      return { ...state, isAdding: true }
+    case "STOP_ADDING":
+      return { ...state, isAdding: false }
 
     default:
       return state

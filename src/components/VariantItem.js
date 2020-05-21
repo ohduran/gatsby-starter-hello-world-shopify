@@ -1,11 +1,11 @@
 import React, { useContext } from "react"
-import { CartContext } from "../contexts/CartContext"
+import { CartContext, useAddItemToCart } from "../contexts/CartContext"
 
 const VariantItem = ({ variant }) => {
-  const { dispatch } = useContext(CartContext)
-  const handleAddToCartButton = variant => {
-    dispatch({ type: "ADD_VARIANT", variant: variant.shopifyId })
-    console.log("item added to cart with id", variant.shopifyId)
+  const addItemToCart = useAddItemToCart()
+
+  function handleAddToCart(variant) {
+    addItemToCart(variant.shopifyId, 1)
   }
   return (
     <div

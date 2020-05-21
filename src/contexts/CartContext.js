@@ -42,6 +42,7 @@ const CartContextProvider = ({ children }) => {
         try {
           const checkout = await fetchCheckout(client, existingCheckoutId)
           if (!checkout.completedAt) {
+            console.log("Checkout fetched from Shopify with id", checkout.id)
             return {
               client,
               checkout,
@@ -49,11 +50,15 @@ const CartContextProvider = ({ children }) => {
             }
           }
         } catch {
+          console.log(
+            "Something went wrong and the checkout key had to be erased"
+          )
           localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, null)
         }
       }
       const newCheckout = await createNewCheckout(client)
       localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, newCheckout.id)
+      console.log("The new checkout id stored is", newCheckout.dispatch)
       return {
         client,
         newCheckout,
@@ -72,7 +77,7 @@ const CartContextProvider = ({ children }) => {
 }
 
 function useAddItemToCart() {
-  const { cart, dispatch } = useContext(CartContext)
+  const { dispatch } = useContext(CartContext)
 
   async function addItemToCart(variantId, quantity) {
     if (variantId === "" || !quantity) {
@@ -80,14 +85,10 @@ function useAddItemToCart() {
       return
     }
 
-    dispatch({ type: "START_ADDING" })
-
     const isBrowser = typeof window !== "undefined"
-    if (isBrowser) {
-      localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, JSON.stringify(cart))
-    }
-
-    const checkoutId = cart.checkout.id
+    const checkoutId = isBrowser
+      ? localStorage.getItem(SHOPIFY_CHECKOUT_STORAGE_KEY)
+      : null
     const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }]
 
     const newCheckout = await client.checkout.addLineItems(
@@ -95,7 +96,7 @@ function useAddItemToCart() {
       lineItemsToAdd
     )
 
-    dispatch({ type: "ADD_VARIANT", variantId, quantity })
+    dispatch({ type: "UPDATE_CHECKOUT", checkout: newCheckout })
   }
 
   return addItemToCart

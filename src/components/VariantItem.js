@@ -1,5 +1,5 @@
-import React, { useContext } from "react"
-import { CartContext, useAddItemToCart } from "../contexts/CartContext"
+import React from "react"
+import { useAddItemToCart } from "../contexts/CartContext"
 
 const VariantItem = ({ variant }) => {
   const addItemToCart = useAddItemToCart()
@@ -24,7 +24,7 @@ const VariantItem = ({ variant }) => {
       </p>
       <button
         onClick={() => {
-          handleAddToCartButton(variant)
+          handleAddToCart(variant)
         }}
       >
         Add to Cart

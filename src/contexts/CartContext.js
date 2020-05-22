@@ -107,4 +107,13 @@ function useAddItemToCart() {
   return addItemToCart
 }
 
-export { CartContext, CartContextProvider, useAddItemToCart }
+function useGoToCheckout() {
+  const { cart } = useContext(CartContext)
+
+  return () => {
+    console.log("Going to Checkout!")
+    window.open(cart.checkout.webUrl)
+  }
+}
+
+export { CartContext, CartContextProvider, useAddItemToCart, useGoToCheckout }

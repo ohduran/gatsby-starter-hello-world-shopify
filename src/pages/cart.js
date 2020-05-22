@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import DefaultLayout from "../layouts"
-import { CartContext } from "../contexts/CartContext"
+import { CartContext, useGoToCheckout } from "../contexts/CartContext"
 
 const Cart = () => {
   const {
@@ -8,11 +8,13 @@ const Cart = () => {
       checkout: { lineItems },
     },
   } = useContext(CartContext)
-  console.log(lineItems)
+
+  const goToCheckout = useGoToCheckout()
   return (
     <DefaultLayout>
       <h1>Cart</h1>
       <div>The cart length is {lineItems.length}</div>
+      <button onClick={goToCheckout}>Go To Checkout</button>
       <ul
         style={{
           display: "grid",

@@ -43,6 +43,11 @@ const CartContextProvider = ({ children }) => {
           const checkout = await fetchCheckout(client, existingCheckoutId)
           if (!checkout.completedAt) {
             console.log("Checkout fetched from Shopify with id", checkout.id)
+            console.log("Checkout contains", checkout.lineItems)
+            if (checkout) {
+              console.log("Updating checkout in browser")
+              dispatch({ type: "UPDATE_CHECKOUT", checkout })
+            }
             return {
               client,
               checkout,
@@ -67,7 +72,7 @@ const CartContextProvider = ({ children }) => {
     }
 
     initializeCheckout()
-  }, [cart])
+  }, [])
 
   return (
     <CartContext.Provider value={{ cart, dispatch }}>

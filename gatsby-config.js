@@ -6,7 +6,6 @@ require("dotenv").config({
 module.exports = {
   /* Your site config here */
   plugins: [
-    `gatsby-plugin-postcss`,
     {
       // This plugin lets me access environment variables that
       // aren't prefixed with Gatsby. This allows me to use

@@ -6,6 +6,8 @@
 
 # Gatsby Starter Hello World Shopify
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0f88d9fa-e02a-4f25-a0c3-432acc47203b/deploy-status)](https://app.netlify.com/sites/gatsby-starter-hello-world-shopify/deploys)
+
 This Gatsby starter is the skeleton you need to create your own headless Shopify store experience using Gatsby. Now it's time for you to add the meat of your new store.
 
 #### [Try DEMO](https://hello-world-shopify.alvaroduran.com/)

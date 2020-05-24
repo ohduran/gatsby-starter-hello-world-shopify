@@ -1,104 +1,71 @@
 <p align="center">
   <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
+    <img alt="Gatsby + Shopify" src="static/shopify+gatsby.png" height="60px" />
   </a>
 </p>
-<h1 align="center">
-  Gatsby's hello-world Tailwind CSS starter
-</h1>
 
-Kick off your project with this hello-world boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+# Gatsby Starter Hello World Shopify
 
-It also includes the Tailwind CSS boilerplate you need to jumpstart your project using the renowned utility-first CSS framework.
+This Gatsby starter is the skeleton you need to create your own headless Shopify store experience using Gatsby. Now it's time for you to add the meat of your new store.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+#### [Try DEMO](https://hello-world-shopify.alvaroduran.com/)
 
 ## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+#### Set up your Shopify account
 
-    Use the Gatsby CLI to create a new site, specifying the hello-world starter.
+1.  Create a [new Shopify account](https://www.shopify.com/) and store if you don’t have one.
 
-    ```shell
-    # create a new Gatsby site using the hello-world-tailwind-css starter
-    gatsby new my-hello-world-tailwind-css-starter https://github.com/ohduran/gatsby-starter-hello-world-tailwind-css
-    ```
+2.  Create a private app in your store by navigating to Apps, then Manage private apps.
 
-1.  **Start developing.**
+3.  Create a new private app, with any “Private app name” and leaving the default permissions as Read access under Admin API.
 
-    Navigate into your new site’s directory and start it up.
+4.  Enable the [Shopify Storefront API](https://shopify.dev/docs/storefront-api) by checking the box that says “Allow this app to access your storefront data using Storefront API”. Make sure to also grant access to _read product_ and _customer tags_ by checking their corresponding boxes.
 
-    ```shell
-    cd my-hello-world-tailwind-css-starter/
-    gatsby develop
-    ```
+#### Create a Gatsby site
 
-1.  **Open the source code and start editing!**
+Use the Gatsby CLI to create a new site, specifying this starter.
 
-    Your site is now running at `http://localhost:8000`!
+```shell
+# create a new Gatsby site using the hello-world-tailwind-css starter
+gatsby new my-new-store https://github.com/ohduran/gatsby-starter-hello-world-shopify
+```
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+#### Configure your Gatsby site to talk to your Shopify store
 
-    Open the `my-hello-world-tailwind-css-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+Check out the **env.example** file. Rename it as **.env** and introduce your shopify credentials (don't worry, this file will be ignored by git):
 
-## 🧐 What's inside?
+1. **SHOP_NAME**: The domain name of your Shopify shop.
 
-A quick look at the top-level files and directories you'll see in this Gatsby project.
+Example: 'gatsby-source-shopify-test-shop' if your Shopify address is 'gatsby-source-shopify-test-shop.myshopify.com'.
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    ├── postcss.config.js
-    ├── README.md
-    └── tailwind.config.js
+If you are running your shop on a custom domain, you need to use the whole domain as the shop name, without a trailing slash, for example: 'gatsby-shop.com'.
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+2. **SHOP_TOKEN**: An API access token to your Shopify shop.
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+You can generate an access token in the "Manage private apps" section of your shop's Apps settings. In the Storefront API section, be sure to select "Allow this app to access your storefront data using the Storefront API". More info [here](https://help.shopify.com/api/custom-storefronts/storefront-api/getting-started#authentication).
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+#### Add some products to your Shopify store
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+Now is the time to add some Products on your Shopify admin panel with pictures and variants - size, color, etc.
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+#### Start developing
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
+Navigate into your new site’s directory and start it up.
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+```shell
+cd my-new-store/
+gatsby develop
+```
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+#### Open the source code and start editing!
 
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
+Your site is now running at `http://localhost:8000`!
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+Notice that each product is listed on the index page, and you can access to its detail page with info about variants and prices. The **Add to Cart** functionality is already set up, as well as the **Go to Checkout** section on the cart page.
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+Not convinced? See it for yourself on the [demo](https://hello-world-shopify.alvaroduran.com/).
 
-12. **`postcss.config.js`**: This the main configuration file for PostCSS. Includes the necessary adjustments to run Tailwind CSS on your site.
+## 🎓 Learn more
 
-13. **`README.md`**: A text file containing useful reference information about your project.
-
-14. **`tailwind.config.js`**: This is the main configuration file for Tailwind. See https://tailwindcss.com/docs/configuration.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ohduran/gatsby-starter-hello-world-tailwind-css)
-
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/import/project?template=https://github.com/ohduran/gatsby-starter-hello-world-tailwind-css)
+Looking for more guidance? A quick tutorial on how to use Shopify with Gatsby lives [on the Gatsby website](https://www.gatsbyjs.org/docs/building-an-ecommerce-site-with-shopify/).

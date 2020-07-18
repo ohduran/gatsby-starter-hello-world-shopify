@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "dotenv": "8.2.0",
-    "gatsby": "2.23.3",
     "gatsby-plugin-env-variables": "2.0.0",
-    "gatsby-source-shopify": "3.2.11",
+    "gatsby": "2.24.4",
+    "gatsby-source-shopify": "3.2.22",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "shopify-buy": "2.10.0"
+    "shopify-buy": "2.11.0"
   },
   "devDependencies": {
     "prettier": "2.0.5",

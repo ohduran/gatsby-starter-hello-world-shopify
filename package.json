@@ -16,7 +16,7 @@
   "dependencies": {
     "dotenv": "8.2.0",
     "gatsby-plugin-env-variables": "2.0.0",
-    "gatsby": "2.24.36",
+    "gatsby": "2.24.43",
     "gatsby-source-shopify": "3.2.26",
     "react": "16.13.1",
     "react-dom": "16.13.1",

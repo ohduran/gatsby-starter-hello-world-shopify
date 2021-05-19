@@ -18,8 +18,8 @@
     "gatsby-plugin-env-variables": "2.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "gatsby": "2.24.89",
-    "gatsby-source-shopify": "3.2.39",
+    "gatsby": "3.5.0",
+    "gatsby-source-shopify": "4.5.0",
     "shopify-buy": "2.11.0"
   },
   "devDependencies": {
